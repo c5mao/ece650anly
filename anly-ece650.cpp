@@ -48,13 +48,21 @@ struct timespec td3_ts;
 Function Prototype
 ******************************************************/ 
 static void
-save_time(struct timespec ts)
+save_time(void)
 {
   ofstream outputfile ("measured_time.txt",std::ios_base::app);
   if (outputfile.is_open())
   {
-    outputfile << ts.tv_sec << " secs" << endl;
-    outputfile << ts.tv_nsec << " ns" << endl;
+    outputfile << "CNF-SAT-VC:" << endl;
+    outputfile << td1_ts.tv_sec << " secs" << endl;
+    outputfile << td1_ts.tv_nsec << " ns" << endl;
+    outputfile << "VC-1:" << endl;
+    outputfile << td2_ts.tv_sec << " secs" << endl;
+    outputfile << td2_ts.tv_nsec << " ns" << endl;
+    outputfile << "VC-2:" << endl;
+    outputfile << td3_ts.tv_sec << " secs" << endl;
+    outputfile << td3_ts.tv_nsec << " ns" << endl;
+    outputfile << endl;
     outputfile.close();
   }
   else cout << "Unable to open file";
@@ -278,7 +286,7 @@ int main(){
 	string line;
 	int error=NO_ERROR;
 
-    ifstream inputfile ("simple_graph.txt");
+    ifstream inputfile ("/home/c5mao/ece650anly/simple_graph.txt");
 
     using Minisat::mkLit;
     using Minisat::lbool;
@@ -309,7 +317,6 @@ int main(){
                 pthread_join (thread2_id, NULL);
                 pthread_join (thread3_id, NULL);
 
-
                 cout << "CNF-SAT-VC: "; 
                 sort(MiniVC.begin(),MiniVC.end());
                 for (auto vc : MiniVC) 
@@ -327,12 +334,7 @@ int main(){
                 for (auto vc : vc_2) 
                     cout << vc << " "; 
                 cout << endl;
-                //pthread_getcpuclockid(pthread_self(), &cid);
-                save_time(td1_ts);
-                save_time(td2_ts);
-                save_time(td3_ts);
-                pclock("Main CPU time:    ", cid);
-
+                save_time();
             }
 	    }catch(...){
 	    	cout << "Error: unexpected error" << endl;
