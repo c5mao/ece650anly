@@ -66,6 +66,16 @@ save_time(void)
     outputfile.close();
   }
   else cout << "Unable to open file";
+    
+  cout << "CNF-SAT-VC:" << endl;
+  cout << td1_ts.tv_sec << " secs" << endl;
+  cout << td1_ts.tv_nsec << " ns" << endl;
+  cout << "VC-1:" << endl;
+  cout << td2_ts.tv_sec << " secs" << endl;
+  cout << td2_ts.tv_nsec << " ns" << endl;
+  cout << "VC-2:" << endl;
+  cout << td3_ts.tv_sec << " secs" << endl;
+  cout << td3_ts.tv_nsec << " ns" << endl;
 }
 static void
 pclock(const char *msg, clockid_t cid)
@@ -78,8 +88,8 @@ pclock(const char *msg, clockid_t cid)
         cout << "Error:get time" << endl;
     
     //printf("%4ld.%03ld\n", ts.tv_sec, ts.tv_nsec / 1000000);
-    cout << ts.tv_sec << " secs" << endl;
-    cout << ts.tv_nsec << " ns" << endl;
+    //cout << ts.tv_sec << " secs" << endl;
+    //cout << ts.tv_nsec << " ns" << endl;
 
     if (cid==cid1)
         td1_ts=ts;
