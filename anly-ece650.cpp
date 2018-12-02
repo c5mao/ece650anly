@@ -50,32 +50,63 @@ Function Prototype
 static void
 save_time(void)
 {
-  ofstream outputfile ("measured_time.txt",std::ios_base::app);
-  if (outputfile.is_open())
-  {
-    outputfile << "CNF-SAT-VC:" << endl;
-    outputfile << td1_ts.tv_sec << " secs" << endl;
-    outputfile << td1_ts.tv_nsec << " ns" << endl;
-    outputfile << "VC-1:" << endl;
-    outputfile << td2_ts.tv_sec << " secs" << endl;
-    outputfile << td2_ts.tv_nsec << " ns" << endl;
-    outputfile << "VC-2:" << endl;
-    outputfile << td3_ts.tv_sec << " secs" << endl;
-    outputfile << td3_ts.tv_nsec << " ns" << endl;
-    outputfile << endl;
-    outputfile.close();
-  }
-  else cout << "Unable to open file";
+    ofstream outputfile ("measured_time.txt",std::ios_base::app);
+    if (outputfile.is_open())
+    {
+  	    outputfile << "CNF-SAT-VC: "; 
+        sort(MiniVC.begin(),MiniVC.end());
+        for (auto vc : MiniVC) 
+            outputfile << vc << " "; 
+        outputfile << endl;
+
+        outputfile << "APPROX-VC-1: "; 
+        sort(vc_1.begin(),vc_1.end());
+        for (auto vc : vc_1) 
+            outputfile << vc << " "; 
+        outputfile << endl;
+
+        outputfile << "APPROX-VC-2: "; 
+        sort(vc_2.begin(),vc_2.end());
+        for (auto vc : vc_2) 
+            outputfile << vc << " "; 
+        outputfile << endl;
+
+        outputfile << "CNF-SAT-VC:" << endl;
+    	outputfile << td1_ts.tv_sec << " secs" << endl;
+    	outputfile << td1_ts.tv_nsec << " ns" << endl;
+    	outputfile << "VC-1:" << endl;
+    	outputfile << td2_ts.tv_sec << " secs" << endl;
+    	outputfile << td2_ts.tv_nsec << " ns" << endl;
+    	outputfile << "VC-2:" << endl;
+    	outputfile << td3_ts.tv_sec << " secs" << endl;
+    	outputfile << td3_ts.tv_nsec << " ns" << endl;
+    	outputfile << endl;
+    	outputfile.close();
+    }
+    else cout << "Unable to open file";
+
+    cout << "CNF-SAT-VC: "; 
+    for (auto vc : MiniVC) 
+        cout << vc << " "; 
+    cout << endl;
+    cout << "APPROX-VC-1: "; 
+    for (auto vc : vc_1) 
+    cout << vc << " "; 
+    cout << endl;
+    cout << "APPROX-VC-2: "; 
+    for (auto vc : vc_2) 
+    cout << vc << " "; 
+    cout << endl;
     
-  cout << "CNF-SAT-VC:" << endl;
-  cout << td1_ts.tv_sec << " secs" << endl;
-  cout << td1_ts.tv_nsec << " ns" << endl;
-  cout << "VC-1:" << endl;
-  cout << td2_ts.tv_sec << " secs" << endl;
-  cout << td2_ts.tv_nsec << " ns" << endl;
-  cout << "VC-2:" << endl;
-  cout << td3_ts.tv_sec << " secs" << endl;
-  cout << td3_ts.tv_nsec << " ns" << endl;
+    cout << "CNF-SAT-VC:" << endl;
+    cout << td1_ts.tv_sec << " secs" << endl;
+    cout << td1_ts.tv_nsec << " ns" << endl;
+    cout << "VC-1:" << endl;
+    cout << td2_ts.tv_sec << " secs" << endl;
+    cout << td2_ts.tv_nsec << " ns" << endl;
+    cout << "VC-2:" << endl;
+    cout << td3_ts.tv_sec << " secs" << endl;
+    cout << td3_ts.tv_nsec << " ns" << endl;
 }
 static void
 pclock(const char *msg, clockid_t cid)
@@ -326,24 +357,6 @@ int main(){
                 pthread_join (thread1_id, NULL);
                 pthread_join (thread2_id, NULL);
                 pthread_join (thread3_id, NULL);
-
-                cout << "CNF-SAT-VC: "; 
-                sort(MiniVC.begin(),MiniVC.end());
-                for (auto vc : MiniVC) 
-                    cout << vc << " "; 
-                cout << endl;
-
-                cout << "APPROX-VC-1: "; 
-                sort(vc_1.begin(),vc_1.end());
-                for (auto vc : vc_1) 
-                cout << vc << " "; 
-                cout << endl;
-
-                cout << "APPROX-VC-2: "; 
-                sort(vc_2.begin(),vc_2.end());
-                for (auto vc : vc_2) 
-                    cout << vc << " "; 
-                cout << endl;
                 save_time();
             }
 	    }catch(...){
