@@ -96,7 +96,7 @@ pclock(const char *msg, clockid_t cid)
     else if(cid==cid2)
         td2_ts=ts;
     else if(cid==cid3)
-        td2_ts=ts;
+        td3_ts=ts;
 }
 //Function to parse the input
 int parse_line(string line){
