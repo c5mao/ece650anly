@@ -327,7 +327,7 @@ int main(){
 	string line;
 	int error=NO_ERROR;
 
-    ifstream inputfile ("/home/c5mao/ece650anly/simple_graph.txt");
+    ifstream inputfile ("/home/c5mao/ece650anly/v20graphs.txt");
 
     using Minisat::mkLit;
     using Minisat::lbool;
